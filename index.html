@@ -7,19 +7,19 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="./logos/favicon.png">
 </head>
-<body class="bg-cover bg-center flex flex-col min-h-screen overflow-x-hidden" style="background-image: url('background.jpeg');">
+<body class="bg-cover bg-center flex flex-col min-h-screen overflow-x-hidden intro-desktop-running" style="background-image: url('background.jpeg');">
 
   <!-- Contenedor libre del logo y mapa -->
-  <div class="w-full max-w-6xl mx-auto mt-5 mb-8 px-4 md:px-0">
-    <div class="flex flex-col md:flex-row items-center gap-4 md:bg-white md:rounded-2xl md:shadow-lg md:p-4">
+  <div id="hero-stage" class="w-full max-w-6xl mx-auto mt-5 mb-8 px-4 md:px-0">
+    <div id="hero-card" class="flex flex-col md:flex-row items-center gap-4 md:bg-white md:rounded-2xl md:shadow-lg md:p-4">
 
     <!-- Logo a la izquierda -->
-    <div class="flex-shrink-0 w-full md:w-[32rem] bg-white rounded-2xl shadow-lg p-3 md:bg-transparent md:shadow-none md:rounded-none md:p-0 flex justify-center md:justify-start">
-      <img src="event-logo.png" alt="Logo Carrera" class="w-full h-auto">
+    <div id="hero-logo-panel" class="flex-shrink-0 w-full md:w-[32rem] bg-white rounded-2xl shadow-lg p-3 md:bg-transparent md:shadow-none md:rounded-none md:p-0 flex justify-center md:justify-start">
+      <img id="event-logo" src="event-logo.png" alt="Logo Carrera" class="w-full h-auto">
     </div>
 
     <!-- Mapas Wikiloc -->
-    <div class="flex-1 w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div id="hero-routes" class="flex-1 w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:bg-transparent md:shadow-none md:rounded-none">
         <div class="w-full h-64 md:h-80 max-h-[300px] overflow-hidden">
           <iframe
@@ -36,8 +36,7 @@
         </div>
         <div class="p-4 text-center bg-white md:bg-transparent">
           <a href="https://loc.wiki/t/267878875?h=qzk5nrvgz2&wa=so&la=es" target="_blank"
-            class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-5 rounded-xl shadow-md transition inline-block"
-            style="background-color: #d67f36;">
+            class="btn-gradient text-black font-bold py-2 px-5 rounded-xl inline-block">
             Ver ruta corta en Wikiloc
           </a>
         </div>
@@ -58,8 +57,7 @@
         </div>
         <div class="p-4 text-center bg-white md:bg-transparent">
           <a href="https://loc.wiki/t/226579275?h=qzk5nrvgz2&wa=so&la=es" target="_blank"
-            class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-5 rounded-xl shadow-md transition inline-block"
-            style="background-color: #d67f36;">
+            class="btn-gradient text-black font-bold py-2 px-5 rounded-xl inline-block">
             Ver ruta larga en Wikiloc
           </a>
         </div>
@@ -70,7 +68,7 @@
   </div>
 
   <!-- Bloques de información y menú (abajo, justo encima del banner) -->
-  <div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-4 justify-center mb-32 px-4 md:px-0">
+  <div id="page-main-content" class="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-4 justify-center mb-32 px-4 md:px-0">
 
     <!-- Información del Evento -->
     <div class="w-full md:w-96 bg-white rounded-2xl shadow-lg p-6 text-center">
@@ -82,8 +80,7 @@
       </ul>
       <!-- Botón Inscripción -->
       <a href="https://aragonciclismo.com/index.php/smartweb/inscripciones/prueba/35148-VI-RUTA-BTT-LA-DESPENACERA" target="_blank"
-        class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-xl shadow-md transition inline-block"
-        style="background-color: #d67f36;">
+        class="btn-gradient text-black font-bold py-3 px-6 rounded-xl inline-block">
         Inscribirme
       </a>
     </div>
@@ -121,7 +118,7 @@
   </div>
 
   <!-- Banner de patrocinadores fijo abajo -->
-  <div class="fixed bottom-0 w-full h-24 overflow-hidden bg-white py-4 z-50">
+  <div id="sponsor-strip" class="fixed bottom-0 w-full h-24 overflow-hidden bg-white py-4 z-50">
     <div class="flex animate-scroll whitespace-nowrap">
       <!-- Logos (primera copia) -->
       <img src="./logos/sponsor-la-union.jpg" alt="La Union" class="h-16 w-auto mx-4">
@@ -169,6 +166,145 @@
 
   <!-- Animación CSS -->
   <style>
+    #page-main-content {
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    #page-main-content > div {
+      transition: opacity 650ms ease, transform 650ms cubic-bezier(0.22, 0.8, 0.2, 1);
+    }
+
+    @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+      #event-logo {
+        width: 92%;
+        transition: width 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+      }
+
+      body.intro-desktop-running #hero-card {
+        width: min(40rem, calc(100vw - 2rem));
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        gap: 0;
+        transform: translateX(0);
+        transition: none;
+      }
+
+      body.intro-desktop-running #hero-logo-panel {
+        width: 100%;
+        max-width: none;
+        transform: scale(1.03);
+        transform-origin: center center;
+        transition: none;
+      }
+
+      body.intro-desktop-running #event-logo {
+        width: 100%;
+      }
+
+      body.intro-desktop-running #hero-routes {
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transform: translateX(30px);
+        pointer-events: none;
+        transition: none;
+      }
+
+      body.intro-desktop-running.intro-desktop-shrink #hero-card {
+        width: 32rem;
+        transform: translateX(calc((32rem - min(72rem, calc(100vw - 2rem))) / 2));
+        transition: width 950ms cubic-bezier(0.18, 0.9, 0.22, 1), transform 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+      }
+
+      body.intro-desktop-running.intro-desktop-shrink #hero-logo-panel {
+        flex: 0 0 32rem;
+        transform: scale(1);
+        transition: transform 950ms cubic-bezier(0.18, 0.9, 0.22, 1), flex-basis 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+      }
+
+      body.intro-desktop-running.intro-desktop-shrink #event-logo {
+        width: 92%;
+      }
+
+      body.intro-desktop-running.intro-desktop-expand #hero-card {
+        width: min(72rem, calc(100vw - 2rem));
+        gap: 1rem;
+        transform: translateX(0);
+        transition: width 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), gap 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), transform 1100ms cubic-bezier(0.22, 0.8, 0.2, 1);
+      }
+
+      body.intro-desktop-running.intro-desktop-expand #hero-logo-panel {
+        flex: 0 0 32rem;
+        transform: scale(1);
+        transition: transform 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), flex-basis 1100ms cubic-bezier(0.22, 0.8, 0.2, 1);
+      }
+
+      body.intro-desktop-running.intro-desktop-expand #event-logo {
+        width: 92%;
+      }
+
+      body.intro-desktop-running.intro-desktop-expand #hero-routes {
+        max-width: 1800px;
+        opacity: 1;
+        transform: translateX(0);
+        transition: max-width 1000ms cubic-bezier(0.22, 0.8, 0.2, 1), opacity 520ms ease, transform 1000ms cubic-bezier(0.22, 0.8, 0.2, 1);
+      }
+
+      body.intro-desktop-running #page-main-content {
+        opacity: 0;
+        transform: translateY(24px);
+        pointer-events: none;
+        transition: none;
+      }
+
+      body.intro-desktop-running #page-main-content > div {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: none;
+      }
+
+      body.intro-desktop-ready #page-main-content {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 500ms ease, transform 500ms ease;
+      }
+
+      body.intro-desktop-ready #page-main-content > div {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      body.intro-desktop-ready #page-main-content > div:nth-child(2) {
+        transition-delay: 120ms;
+      }
+    }
+
+    .btn-gradient {
+      background-color: #d67f36;
+      background-image: linear-gradient(120deg, #d67f36 0%, #d67f36 50%, #eab04c 100%);
+      background-size: 220% 220%;
+      background-position: 0% 50%;
+      transition: background-position 260ms ease, filter 260ms ease, box-shadow 260ms ease;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+    }
+
+    .btn-gradient:hover {
+      background-position: 100% 50%;
+      filter: brightness(1.04);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
+    }
+
+    .btn-gradient:active {
+      filter: brightness(0.98);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-gradient:focus-visible {
+      outline: 2px solid #1f2937;
+      outline-offset: 2px;
+    }
+
     @keyframes scroll {
       0% { transform: translateX(-50%); }
       100% { transform: translateX(0); } /* mueve de izquierda a derecha */
@@ -177,10 +313,42 @@
       display: flex;
       width: max-content;
       animation: scroll 40s linear infinite; /* ajusta velocidad */
+      animation-play-state: paused;
+    }
+
+    body.intro-desktop-ready .animate-scroll {
+      animation-play-state: running;
     }
   </style>
 
   <script>
+    window.addEventListener('load', function () {
+      var desktop = window.matchMedia('(min-width: 768px)').matches;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!desktop || reduceMotion) {
+        document.body.classList.remove('intro-desktop-running');
+        document.body.classList.add('intro-desktop-ready');
+        return;
+      }
+
+      // Fase 1: logo en cuadro blanco, estatico 1.5s.
+      window.setTimeout(function () {
+        // Fase 2: el logo se reduce y se coloca a la izquierda.
+        document.body.classList.add('intro-desktop-shrink');
+      }, 1500);
+
+      window.setTimeout(function () {
+        // Fase 3: su mismo fondo blanco se expande y aparecen las rutas.
+        document.body.classList.add('intro-desktop-expand');
+      }, 2550);
+
+      // Fase 4: aparece el resto de la pagina.
+      window.setTimeout(function () {
+        document.body.classList.remove('intro-desktop-running', 'intro-desktop-shrink', 'intro-desktop-expand');
+        document.body.classList.add('intro-desktop-ready');
+      }, 3800);
+    });
+
     // En la previsualizacion local de VS Code, Wikiloc puede bloquear iframes.
     // Mostramos una captura estatica clicable para mantener la misma maquetacion.
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
