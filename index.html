@@ -23,7 +23,8 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:bg-transparent md:shadow-none md:rounded-none">
         <div class="w-full h-64 md:h-[22rem] overflow-hidden">
           <iframe
-            src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=267878875&measures=off&title=on&near=off&images=on&maptype=H"
+            src="about:blank"
+            data-wikiloc-src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=267878875&measures=off&title=on&near=off&images=on&maptype=H"
             data-local-preview="./logos/preview-ruta-corta.svg"
             data-route-url="https://loc.wiki/t/267878875?h=qzk5nrvgz2&wa=so&la=es"
             width="100%"
@@ -44,7 +45,8 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:bg-transparent md:shadow-none md:rounded-none">
         <div class="w-full h-64 md:h-[22rem] overflow-hidden">
           <iframe
-            src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=226579275&measures=off&title=on&near=off&images=on&maptype=H"
+            src="about:blank"
+            data-wikiloc-src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=226579275&measures=off&title=on&near=off&images=on&maptype=H"
             data-local-preview="./logos/preview-ruta-larga.svg"
             data-route-url="https://loc.wiki/t/226579275?h=qzk5nrvgz2&wa=so&la=es"
             width="100%"
@@ -177,7 +179,7 @@
     @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
       #event-logo {
         width: 92%;
-        transition: width 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+        transition: width 520ms cubic-bezier(0.18, 0.9, 0.22, 1);
       }
 
       body.intro-desktop-running #hero-card {
@@ -214,13 +216,13 @@
       body.intro-desktop-running.intro-desktop-shrink #hero-card {
         width: 32rem;
         transform: translateX(calc((32rem - min(72rem, calc(100vw - 2rem))) / 2));
-        transition: width 950ms cubic-bezier(0.18, 0.9, 0.22, 1), transform 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+        transition: width 520ms cubic-bezier(0.18, 0.9, 0.22, 1), transform 520ms cubic-bezier(0.18, 0.9, 0.22, 1);
       }
 
       body.intro-desktop-running.intro-desktop-shrink #hero-logo-panel {
         flex: 0 0 32rem;
         transform: scale(1);
-        transition: transform 950ms cubic-bezier(0.18, 0.9, 0.22, 1), flex-basis 950ms cubic-bezier(0.18, 0.9, 0.22, 1);
+        transition: transform 520ms cubic-bezier(0.18, 0.9, 0.22, 1), flex-basis 520ms cubic-bezier(0.18, 0.9, 0.22, 1);
       }
 
       body.intro-desktop-running.intro-desktop-shrink #event-logo {
@@ -231,13 +233,13 @@
         width: min(72rem, calc(100vw - 2rem));
         gap: 1rem;
         transform: translateX(0);
-        transition: width 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), gap 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), transform 1100ms cubic-bezier(0.22, 0.8, 0.2, 1);
+        transition: width 560ms cubic-bezier(0.22, 0.8, 0.2, 1), gap 560ms cubic-bezier(0.22, 0.8, 0.2, 1), transform 560ms cubic-bezier(0.22, 0.8, 0.2, 1);
       }
 
       body.intro-desktop-running.intro-desktop-expand #hero-logo-panel {
         flex: 0 0 32rem;
         transform: scale(1);
-        transition: transform 1100ms cubic-bezier(0.22, 0.8, 0.2, 1), flex-basis 1100ms cubic-bezier(0.22, 0.8, 0.2, 1);
+        transition: transform 560ms cubic-bezier(0.22, 0.8, 0.2, 1), flex-basis 560ms cubic-bezier(0.22, 0.8, 0.2, 1);
       }
 
       body.intro-desktop-running.intro-desktop-expand #event-logo {
@@ -248,7 +250,7 @@
         max-width: 1800px;
         opacity: 1;
         transform: translateX(0);
-        transition: max-width 1000ms cubic-bezier(0.22, 0.8, 0.2, 1), opacity 520ms ease, transform 1000ms cubic-bezier(0.22, 0.8, 0.2, 1);
+        transition: max-width 560ms cubic-bezier(0.22, 0.8, 0.2, 1), opacity 360ms ease, transform 560ms cubic-bezier(0.22, 0.8, 0.2, 1);
       }
 
       body.intro-desktop-running #page-main-content {
@@ -322,12 +324,25 @@
   </style>
 
   <script>
+    var isLocalPreview = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    function loadWikilocMaps() {
+      document.querySelectorAll('iframe[data-wikiloc-src]').forEach(function (frame) {
+        if (frame.getAttribute('src') === 'about:blank') {
+          frame.setAttribute('src', frame.getAttribute('data-wikiloc-src'));
+        }
+      });
+    }
+
     window.addEventListener('load', function () {
       var desktop = window.matchMedia('(min-width: 768px)').matches;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!desktop || reduceMotion) {
         document.body.classList.remove('intro-desktop-running');
         document.body.classList.add('intro-desktop-ready');
+        if (!isLocalPreview) {
+          loadWikilocMaps();
+        }
         return;
       }
 
@@ -335,23 +350,28 @@
       window.setTimeout(function () {
         // Fase 2: el logo se reduce y se coloca a la izquierda.
         document.body.classList.add('intro-desktop-shrink');
-      }, 900);
+      }, 180);
 
       window.setTimeout(function () {
         // Fase 3: su mismo fondo blanco se expande y aparecen las rutas.
         document.body.classList.add('intro-desktop-expand');
-      }, 1950);
+      }, 640);
 
       // Fase 4: aparece el resto de la pagina.
       window.setTimeout(function () {
         document.body.classList.remove('intro-desktop-running', 'intro-desktop-shrink', 'intro-desktop-expand');
         document.body.classList.add('intro-desktop-ready');
-      }, 3200);
+        if (!isLocalPreview) {
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(loadWikilocMaps);
+          });
+        }
+      }, 1200);
     });
 
     // En la previsualizacion local de VS Code, Wikiloc puede bloquear iframes.
     // Mostramos una captura estatica clicable para mantener la misma maquetacion.
-    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    if (isLocalPreview) {
       document.querySelectorAll('iframe[data-local-preview]').forEach(function (frame) {
         var preview = frame.getAttribute('data-local-preview');
         var routeUrl = frame.getAttribute('data-route-url') || '#';
