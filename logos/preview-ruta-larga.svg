@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Previsualizacion ruta larga">
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5f8450"/>
+      <stop offset="100%" stop-color="#3d5f34"/>
+    </linearGradient>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff33" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="360" fill="url(#bg2)"/>
+  <rect width="800" height="360" fill="url(#grid2)"/>
+  <path d="M95 250 L180 225 L260 185 L350 165 L445 170 L525 185 L610 155 L695 110" fill="none" stroke="#f59e0b" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M95 250 L150 205 L220 170" fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="95" cy="250" r="12" fill="#111827"/>
+  <circle cx="695" cy="110" r="12" fill="#111827"/>
+  <circle cx="445" cy="170" r="14" fill="#22c55e" stroke="#ffffff" stroke-width="4"/>
+  <rect x="16" y="16" width="300" height="48" rx="10" fill="#ffffffdd"/>
+  <text x="32" y="47" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">Ruta larga (preview local)</text>
+</svg>

@@ -23,24 +23,44 @@
         <div class="w-full h-64 md:h-80 max-h-[300px] rounded-2xl overflow-hidden">
           <iframe
             src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=267878875&measures=off&title=on&near=off&images=on&maptype=H"
+            data-local-preview="./logos/preview-ruta-corta.svg"
+            data-route-url="https://loc.wiki/t/267878875?h=qzk5nrvgz2&wa=so&la=es"
             width="100%"
             height="100%"
             frameborder="0"
             title="VI Ruta BTT Despeñacera corta"
+            loading="lazy"
             allowfullscreen>
           </iframe>
+        </div>
+        <div class="mt-3 text-center">
+          <a href="https://loc.wiki/t/267878875?h=qzk5nrvgz2&wa=so&la=es" target="_blank"
+            class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-5 rounded-xl shadow-md transition inline-block"
+            style="background-color: #d67f36;">
+            Ver ruta corta en Wikiloc
+          </a>
         </div>
       </div>
       <div>
         <div class="w-full h-64 md:h-80 max-h-[300px] rounded-2xl overflow-hidden">
           <iframe
             src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=226579275&measures=off&title=on&near=off&images=on&maptype=H"
+            data-local-preview="./logos/preview-ruta-larga.svg"
+            data-route-url="https://loc.wiki/t/226579275?h=qzk5nrvgz2&wa=so&la=es"
             width="100%"
             height="100%"
             frameborder="0"
             title="VI Ruta BTT Despeñacera larga"
+            loading="lazy"
             allowfullscreen>
           </iframe>
+        </div>
+        <div class="mt-3 text-center">
+          <a href="https://loc.wiki/t/226579275?h=qzk5nrvgz2&wa=so&la=es" target="_blank"
+            class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-5 rounded-xl shadow-md transition inline-block"
+            style="background-color: #d67f36;">
+            Ver ruta larga en Wikiloc
+          </a>
         </div>
       </div>
     </div>
@@ -120,6 +140,7 @@
       <img src="./logos/sponsor-transportes-bistuer.jpg" alt="Transportes Bistuer" class="h-10 w-auto mx-4">
       <img src="./logos/sponsor-sauter.jpg" alt="Sauter" class="h-16 w-auto mx-4">
       <img src="./logos/sponsor-comarca.jpg" alt="Comarca" class="h-16 w-auto mx-4">
+      <img src="./logos/sponsor-Huesca_LM.jpeg" alt="Huesca LM" class="h-16 w-auto mx-4">
 
       <!-- Logos (segunda copia para scroll continuo) -->
       <img src="./logos/sponsor-la-union.jpg" alt="La Union" class="h-16 w-auto mx-4">
@@ -140,6 +161,7 @@
       <img src="./logos/sponsor-transportes-bistuer.jpg" alt="Transportes Bistuer" class="h-10 w-auto mx-4">
       <img src="./logos/sponsor-sauter.jpg" alt="Sauter" class="h-16 w-auto mx-4">
       <img src="./logos/sponsor-comarca.jpg" alt="Comarca" class="h-16 w-auto mx-4">
+      <img src="./logos/sponsor-Huesca_LM.jpeg" alt="Huesca LM" class="h-16 w-auto mx-4">
     </div>
   </div>
 
@@ -155,6 +177,31 @@
       animation: scroll 40s linear infinite; /* ajusta velocidad */
     }
   </style>
+
+  <script>
+    // En la previsualizacion local de VS Code, Wikiloc puede bloquear iframes.
+    // Mostramos una captura estatica clicable para mantener la misma maquetacion.
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      document.querySelectorAll('iframe[data-local-preview]').forEach(function (frame) {
+        var preview = frame.getAttribute('data-local-preview');
+        var routeUrl = frame.getAttribute('data-route-url') || '#';
+        var link = document.createElement('a');
+        link.href = routeUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'block w-full h-full';
+
+        var img = document.createElement('img');
+        img.src = preview;
+        img.alt = frame.title;
+        img.className = 'w-full h-full object-cover';
+        img.loading = 'lazy';
+
+        link.appendChild(img);
+        frame.replaceWith(link);
+      });
+    }
+  </script>
 
 </body>
 </html>
