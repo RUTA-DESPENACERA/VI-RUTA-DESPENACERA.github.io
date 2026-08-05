@@ -21,7 +21,7 @@
     <!-- Mapas Wikiloc -->
     <div id="hero-routes" class="flex-1 w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:bg-transparent md:shadow-none md:rounded-none">
-        <div class="w-full h-64 md:h-80 max-h-[300px] overflow-hidden">
+        <div class="w-full h-64 md:h-[22rem] overflow-hidden">
           <iframe
             src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=267878875&measures=off&title=on&near=off&images=on&maptype=H"
             data-local-preview="./logos/preview-ruta-corta.svg"
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden md:bg-transparent md:shadow-none md:rounded-none">
-        <div class="w-full h-64 md:h-80 max-h-[300px] overflow-hidden">
+        <div class="w-full h-64 md:h-[22rem] overflow-hidden">
           <iframe
             src="https://es.wikiloc.com/wikiloc/spatialArtifacts.do?event=view&id=226579275&measures=off&title=on&near=off&images=on&maptype=H"
             data-local-preview="./logos/preview-ruta-larga.svg"
@@ -331,22 +331,22 @@
         return;
       }
 
-      // Fase 1: logo en cuadro blanco, estatico 1.5s.
+      // Fase 1: logo en cuadro blanco, estatico brevemente.
       window.setTimeout(function () {
         // Fase 2: el logo se reduce y se coloca a la izquierda.
         document.body.classList.add('intro-desktop-shrink');
-      }, 1500);
+      }, 900);
 
       window.setTimeout(function () {
         // Fase 3: su mismo fondo blanco se expande y aparecen las rutas.
         document.body.classList.add('intro-desktop-expand');
-      }, 2550);
+      }, 1950);
 
       // Fase 4: aparece el resto de la pagina.
       window.setTimeout(function () {
         document.body.classList.remove('intro-desktop-running', 'intro-desktop-shrink', 'intro-desktop-expand');
         document.body.classList.add('intro-desktop-ready');
-      }, 3800);
+      }, 3200);
     });
 
     // En la previsualizacion local de VS Code, Wikiloc puede bloquear iframes.
